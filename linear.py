@@ -31,10 +31,9 @@ class Linear():
         self.dZdW = self.feature
         self.dZdb = self.ones
 
-        self.dLdW= np.dot(delta, self.dZdA.T)
-        self.dLdb= np.mean(delta, axis=0, keepdims=True)
+        self.dLdW= np.dot(delta.T, self.feature)
+        self.dLdb= np.mean(delta, axis=0, keepdims=True).T
         self.dLdW = self.dLdW / self.batch_size
-        self.dLdb = self.dLdb / self.batch_size
         self.dLdA= np.dot(delta, self.dZdA.T)
         return self.dLdA
 
