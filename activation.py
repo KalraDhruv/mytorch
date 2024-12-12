@@ -72,17 +72,12 @@ class ReLu(Activation):
         super(ReLu, self).__init__()
 
     def forward(self, x):
-        if x < 0:
-            self.state = 0
-        else:
-            self.state = x
+        self.state = np.where(x < 0, 0, x)
         return self.state
 
     def derivative(self):
-        if self.state == 0:
-            return 0
-        else:
-            return 1
+       return np.where(self.state > 0, 1, 0)
+
 
 
 def main():
