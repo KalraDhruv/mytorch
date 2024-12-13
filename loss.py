@@ -55,7 +55,7 @@ class SoftmaxCrossEntropy(Criterion):
         self.labels = y
         x = self.logits - np.max(self.logits, axis=1, keepdims=True) # LogSumExp Trick for preventing overflow and underflow
         self.softmax = np.exp(x) / np.sum(np.exp(x), axis=1, keepdims=True)
-        self.loss = -np.sum(self.labels * np.log(self.softmax), axis=1)
+        self.loss = -np.mean(np.sum(self.labels * np.log(self.softmax), axis=1))
         return self.loss
 
     def backward(self):
